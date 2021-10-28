@@ -14,7 +14,7 @@ public class EmailListServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "/index.jsp";
+		String url = "/join.jsp";
 
 		// get current action
 		String action = request.getParameter("action");
@@ -24,7 +24,7 @@ public class EmailListServlet extends HttpServlet {
 
 		// perform action and set URL to appropriate page
 		if (action.equals("join")) {
-			url = "/index.jsp"; // the "join" page
+			url = "/join.jsp"; // the "join" page
 		} else if (action.equals("add")) {
 			// get parameters from the request
 			String firstName = request.getParameter("firstName");
@@ -42,13 +42,13 @@ public class EmailListServlet extends HttpServlet {
 			if (firstName == null || lastName == null || email == null || firstName.isEmpty() || lastName.isEmpty()
 					|| email.isEmpty()) {
 				message = "*Please fill out all three text boxes!";
-				url = "/index.jsp";
+				url = "/join.jsp";
 			} else if (!email.contains("@")) {
 				message = "*Invalid email!";
-				url = "/index.jsp";
+				url = "/join.jsp";
 			} else if (UserDB.emailExists(user.getEmail())) {
 				message = "*This email address already exists. " + "Please enter another email address!";
-				url = "/index.jsp";
+				url = "/join.jsp";
 			} else {
 				message = "";
 				url = "/thanks.jsp";
